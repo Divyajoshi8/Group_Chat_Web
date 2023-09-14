@@ -4,6 +4,7 @@ const jwt = require("jsonwebtoken");
 const sequelize = require("../Utils/database");
 const Sib = require("sib-api-v3-sdk");
 const { Op } = require("sequelize");
+const User = require("../Models/userModel");
 
 function generateAccessToken(id, email) {
     return jwt.sign({ userId: id, email: email }, "dmggkfhdiflhdudmlfjfldnbdndggfkfubdk");
@@ -23,36 +24,38 @@ const postUserSignUp = async (req, res, next) => {
       const email = req.body.email;
       const number = req.body.number;
       const password = req.body.password;
-
-      await User.findOne({ [Op.or]: [{ email: email }, { number: number }] })
-        .then((user) => {
-          if (user) {
-            res
-              .status(409)
-              .send(
-                `<script>alert('This email or number is already taken. Please choose another one.'); window.location.href='/'</script>`
-              );
-          } else {
-            bcrypt.hash(password, 10, async (err, hash) => {
-              await User.create({
-                name: name,
-                email: email,
-                number: number,
-                password: hash,
-              });
-            });
-            res
-              .status(200)
-              .send(
-                `<script>alert('User Created Successfully!'); window.location.href='/'</script>`
-              );
-          }
-        })
-        .catch((err) => console.log(err));
+  
+      const existingUser = await User.findOne({
+        where: {
+          [Op.or]: [{ email }, { number }],
+        },
+      });
+  
+      if (existingUser) {
+        res
+          .status(409)
+          .send(
+            `<script>alert('This email or number is already taken. Please choose another one.'); window.location.href='/'</script>`
+          );
+      } else {
+        bcrypt.hash(password, 10, async (err, hash) => {
+          await User.create({
+            name: name,
+            email: email,
+            number: number,
+            password: hash,
+          });
+        });
+        res
+          .status(200)
+          .send(
+            `<script>alert('User Created Successfully!'); window.location.href='/'</script>`
+          );
+      }
     } catch (error) {
       console.log(error);
     }
-  };
+};
 
   const postUserLogin = async (req, res, next) => {
     try {

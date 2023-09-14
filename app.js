@@ -23,10 +23,22 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 const userRouter = require("./Routes/userRoutes");
+const homePageRouter = require("./Routes/homePageRoutes");
+const chatRouter = require("./Routes/chatRoutes");
+
+const User = require("./Models/userModel");
+const Chat = require("./Models/userModel");
+
+//Relationships between Tables
+User.hasMany(Chat, { onDelete: "CASCADE", hooks: true });
+Chat.belongsTo(User);
 
 //Middleware
 app.use("/", userRouter);
 app.use("/user", userRouter);
+app.use("/home", homePageRouter);
+app.use("/chat", chatRouter);
+
 
 sequelize
   .sync()
