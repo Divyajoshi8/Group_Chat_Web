@@ -4,7 +4,7 @@ html {
   margin: 0;
   /*background: yellowgreen;*/
   background: -webkit-linear-gradient(to right, #dcd6f7, whitesmoke);
-  background: linear-gradient(to right, white, whitesmoke);
+  background: linear-gradient(to right, white, rgb(241, 238, 238));
 }
 
 .chat {
@@ -14,7 +14,7 @@ html {
 .card {
     height: 90vh;
   border-radius: 15px !important;
-  background-color: whitesmoke !important;
+  background-color: rgb(146, 209, 211) !important;
 }
 
 .contacts_body {
@@ -51,7 +51,7 @@ html {
     outline: 0px !important;
   }
   .type_msg {
-    background-color: white !important;
+    background-color: rgb(250, 246, 246) !important;
     border: 0 !important;
     color: black !important;
     height: 60px !important;
@@ -63,9 +63,9 @@ html {
   }
   .attach_btn {
     border-radius: 15px 0 0 15px !important;
-    background-color: whitesmoke !important;
+    background-color: rgb(46, 45, 45) !important;
     border: 0 !important;
-    color: black !important;
+    color: rgb(240, 235, 235) !important;
     cursor: pointer;
   }
   
@@ -98,19 +98,19 @@ html {
   }
   
   .active {
-    background-color: white;
+    background-color: rgb(236, 235, 235);
   }
   
   .user_img {
     height: 70px;
     width: 70px;
-    border: 1.5px solid black;
+    border: 1.5px solid rgb(226, 217, 217);
   }
 
   .user_img_msg {
     height: 40px;
     width: 40px;
-    border: 1.5px solid black;
+    border: 1.5px solid rgb(2, 18, 32);
   }
 
   .img_cont {
@@ -171,7 +171,7 @@ html {
     margin-bottom: auto;
     margin-left: 10px;
     border-radius: 25px;
-    background-color: white;
+    background-color: rgb(230, 226, 226);
     padding: 10px;
     position: relative;
   }
@@ -216,7 +216,7 @@ html {
     position: absolute;
     padding: 15px 0;
     background-color: rgba(0, 0, 0, 0.5);
-    color: white;
+    color: rgb(230, 213, 213);
     border-radius: 15px;
     top: 30px;
     right: 15px;
