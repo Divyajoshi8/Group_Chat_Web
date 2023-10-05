@@ -26,11 +26,14 @@ app.use(bodyParser.json());
 const userRouter = require("./Routes/userRoutes");
 const homePageRouter = require("./Routes/homePageRoutes");
 const chatRouter = require("./Routes/chatRoutes");
+const resetPasswordRouter = require("./Routes/resetPasswordRouter");
 const groupRouter = require("./Routes/groupRoutes");
+
 const User = require("./Models/userModel");
 const Chat = require("./Models/userModel");
 const Group = require("./Models/groupModel");
 const UserGroup = require("./Models/userGroup");
+const ResetPassword = require("./Models/resetPasswordModel");
 
 //Relationships between Tables
 
@@ -42,11 +45,14 @@ Group.hasMany(Chat);
 Group.hasMany(UserGroup);
 UserGroup.belongsTo(User);
 UserGroup.belongsTo(Group);
+ResetPassword.belongsTo(User);
+User.hasMany(ResetPassword);
 
 //middlewares
 app.use("/", userRouter);
 app.use("/user", userRouter);
 app.use("/home", homePageRouter);
+app.use("/password", resetPasswordRouter);
 app.use("/chat", chatRouter);
 app.use("/group", groupRouter);
 
