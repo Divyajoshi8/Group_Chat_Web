@@ -16,6 +16,8 @@ const dotenv = require("dotenv");
 dotenv.config();
 
 const sequelize = require("./Utils/database");
+
+
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -48,8 +50,11 @@ app.use("/home", homePageRouter);
 app.use("/chat", chatRouter);
 app.use("/group", groupRouter);
 
+const job = require("./jobs/cron");
+job.start();
+
 sequelize
-  .sync()
+.sync({ force: true })
   .then((result) => {
     app.listen(process.env.PORT || 3000);
   })
